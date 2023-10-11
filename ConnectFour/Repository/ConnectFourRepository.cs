@@ -1,10 +1,8 @@
+using ConnectFour.Models;
 namespace ConnectFour.Repository;
 
 public class ConnectFourRepository
 {
-    private const int ROWS = 6;
-    private const int COLUMNS = 7;
-
     //Launches the checks of all preconditions, returning a message depending on the precondition that has failed
     public string CheckPreconditions(string board)
     {
@@ -35,11 +33,11 @@ public class ConnectFourRepository
 
 
         //Checks vertical chains
-        for (int columna = 0; columna < COLUMNS; columna++)
+        for (int columna = 0; columna < Board.COLUMNS; columna++)
         {
-            for (int fila = 0; fila < ROWS - 3; fila++)
+            for (int fila = 0; fila < Board.ROWS - 3; fila++)
             {
-                position = columna * ROWS + fila;
+                position = columna * Board.ROWS + fila;
                 piece1 = board[position];
                 piece2 = board[position + 1];
                 piece3 = board[position + 2];
@@ -52,15 +50,15 @@ public class ConnectFourRepository
         }
 
         //Checks horizontal chains
-        for (int fila = 0; fila < ROWS; fila++)
+        for (int fila = 0; fila < Board.ROWS; fila++)
         {
-            for (int columna = 0; columna < COLUMNS - 3; columna++)
+            for (int columna = 0; columna < Board.COLUMNS - 3; columna++)
             {
-                position = columna * ROWS + fila;
+                position = columna * Board.ROWS + fila;
                 piece1 = board[position];
-                piece2 = board[position + ROWS];
-                piece3 = board[position + ROWS * 2];
-                piece4 = board[position + ROWS * 3];
+                piece2 = board[position + Board.ROWS];
+                piece3 = board[position + Board.ROWS * 2];
+                piece4 = board[position + Board.ROWS * 3];
                 if (CheckChain(piece1, piece2, piece3, piece4))
                 {
                     return piece1.ToString();
@@ -70,15 +68,15 @@ public class ConnectFourRepository
         }
 
         //Checks ascending diagonal chains
-        for (int columna = 0; columna < COLUMNS - 3; columna++)
+        for (int columna = 0; columna < Board.COLUMNS - 3; columna++)
         {
-            for (int fila = 0; fila < ROWS - 3; fila++)
+            for (int fila = 0; fila < Board.ROWS - 3; fila++)
             {
-                position = columna * ROWS + fila;
+                position = columna * Board.ROWS + fila;
                 piece1 = board[position];
-                piece2 = board[position + (ROWS + 1)];
-                piece3 = board[position + (ROWS + 1) * 2];
-                piece4 = board[position + (ROWS + 1) * 3];
+                piece2 = board[position + (Board.ROWS + 1)];
+                piece3 = board[position + (Board.ROWS + 1) * 2];
+                piece4 = board[position + (Board.ROWS + 1) * 3];
                 if (CheckChain(piece1, piece2, piece3, piece4))
                 {
                     return piece1.ToString();
@@ -87,15 +85,15 @@ public class ConnectFourRepository
         }
 
         //Checks descending diagonal chains
-        for (int columna = 0; columna < COLUMNS - 3; columna++)
+        for (int columna = 0; columna < Board.COLUMNS - 3; columna++)
         {
-            for (int fila = 3; fila < ROWS; fila++)
+            for (int fila = 3; fila < Board.ROWS; fila++)
             {
-                position = columna * ROWS + fila;
+                position = columna * Board.ROWS + fila;
                 piece1 = board[position];
-                piece2 = board[position + (ROWS - 1)];
-                piece3 = board[position + (ROWS - 1) * 2];
-                piece4 = board[position + (ROWS - 1) * 3];
+                piece2 = board[position + (Board.ROWS - 1)];
+                piece3 = board[position + (Board.ROWS - 1) * 2];
+                piece4 = board[position + (Board.ROWS - 1) * 3];
                 if (CheckChain(piece1, piece2, piece3, piece4))
                 {
                     return piece1.ToString();
@@ -109,7 +107,7 @@ public class ConnectFourRepository
     //Checks if the provided board has the correct size, which should be equal to the product of COLUMNS and ROWS.
     private bool CheckSizeBoard(string board)
     {
-        if (board.Length != COLUMNS * ROWS)
+        if (board.Length != Board.COLUMNS * Board.ROWS)
         {
             return false;
         }
@@ -122,7 +120,7 @@ public class ConnectFourRepository
         int countA = board.Count(piece => piece == 'A');
         int countB = board.Count(piece => piece == 'B');
         int countX = board.Count(piece => piece == 'X');
-        if ((countA - countB) >= 0 && (countA - countB) <= 1 && ((countA + countB + countX) == (ROWS * COLUMNS)))
+        if ((countA - countB) >= 0 && (countA - countB) <= 1 && ((countA + countB + countX) == (Board.ROWS * Board.COLUMNS)))
         {
             return true;
         }
@@ -132,9 +130,9 @@ public class ConnectFourRepository
     //Checks if in the provided board is there at least one 'A' piece in the bottom of a column
     private bool CheckAStarted(string board)
     {
-        char[] bottomPieces = new char[COLUMNS];
+        char[] bottomPieces = new char[Board.COLUMNS];
         int index = 0;
-        for (int position = 0; position < board.Length; position += ROWS)
+        for (int position = 0; position < board.Length; position += Board.ROWS)
         {
             bottomPieces[index] = board[position];
             index++;
@@ -152,7 +150,7 @@ public class ConnectFourRepository
     private bool CheckPhysicallyPositions(string board)
     {
         int totalLength = board.Length;
-        int columnsLength = totalLength / COLUMNS;
+        int columnsLength = totalLength / Board.COLUMNS;
         List<string> columns = new List<string>();
 
         for (int i = 0; i < totalLength; i += columnsLength)
