@@ -17,8 +17,23 @@ public class ConnectFourController : ControllerBase
     [HttpGet]
     public IActionResult GetWinner()
     {
+        string board = "AAAXXXBBXXXXXXXXXXXXXXXXXXXXXXXXXXXXABABXB";
+        try
+        {
+            if (_connectFourRepository.CheckPhysicallyPositions(board))
+            {
+                return Ok("yes");
+            }
+            else
+            {
+                return BadRequest("There are positions on the board that are not physically possible.");
+            }
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
 
-        return Ok("yes");
     }
 
 }
