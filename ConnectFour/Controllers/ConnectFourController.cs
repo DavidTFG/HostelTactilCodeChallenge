@@ -17,27 +17,35 @@ public class ConnectFourController : ControllerBase
     [HttpGet]
     public IActionResult GetWinner()
     {
-        string board = "XXXXXBXXXXXXXSSXXAXXXXXXXXXXAXXXXXXXXXXXXXDX";
+        string board = "_QQQQQ_WWWWW_EEEEE_RRRRR_TTTTT_YYYYYXUUUUU";
         try
         {
             if (_connectFourRepository.CheckSizeBoard(board))
             {
-                if (_connectFourRepository.CheckPhysicallyPositions(board))
+                if (_connectFourRepository.CheckBalancedPieces(board))
                 {
-                    if (_connectFourRepository.CheckBalancedPieces(board))
+                    if (_connectFourRepository.CheckAStarted(board))
                     {
-                        return Ok("yes");
+                        if (_connectFourRepository.CheckPhysicallyPositions(board))
+                        {
+                            return Ok("yes");
+                        }
+                        else
+                        {
+                            return BadRequest("There are pieces on the board that cannot be physically placed there.");
+                        }
                     }
                     else
                     {
-                        return BadRequest("The board is not balanced: The Team A and Team B ahave a different number of pieces.");
-
+                        return BadRequest("Player A didn't started.");
                     }
                 }
                 else
                 {
-                    return BadRequest("There are pieces on the board that cannot be physically placed there.");
+                    return BadRequest("The board is not balanced: The Team A and Team B ahave a different number of pieces.");
+
                 }
+
             }
             else
             {
