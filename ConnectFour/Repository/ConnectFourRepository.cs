@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Text;
-
 namespace ConnectFour.Repository;
 
 public class ConnectFourRepository
@@ -125,7 +122,7 @@ public class ConnectFourRepository
         int countA = board.Count(piece => piece == 'A');
         int countB = board.Count(piece => piece == 'B');
         int countX = board.Count(piece => piece == 'X');
-        if (Math.Abs(countA - countB) <= 1 && ((countA + countB + countX) == (ROWS * COLUMNS)))
+        if ((countA - countB) >= 0 && (countA - countB) <= 1 && ((countA + countB + countX) == (ROWS * COLUMNS)))
         {
             return true;
         }
