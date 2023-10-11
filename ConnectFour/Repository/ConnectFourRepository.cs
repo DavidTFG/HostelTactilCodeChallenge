@@ -8,6 +8,12 @@ public class ConnectFourRepository : IConnectFourRepository
     private const int COLUMNS = 7;
     public bool CheckBalancedPieces(string board)
     {
+        int countA = board.Count(piece => piece == 'A');
+        int countB = board.Count(piece => piece == 'B');
+        if (Math.Abs(countA - countB) > 1)
+        {
+            return false;
+        }
         return true;
     }
 

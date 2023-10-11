@@ -17,12 +17,20 @@ public class ConnectFourController : ControllerBase
     [HttpGet]
     public IActionResult GetWinner()
     {
-        string board = "AAAXXXBBXXXXXXXXXXXXXXXXXXXXXXXXXXXXABABXB";
+        string board = "XXXXXXBXXXXXXXXXAXXXXXXXXXXAXXXXXXXXXXXXXX";
         try
         {
             if (_connectFourRepository.CheckPhysicallyPositions(board))
             {
-                return Ok("yes");
+                if (_connectFourRepository.CheckBalancedPieces(board))
+                {
+                    return Ok("yes");
+                }
+                else
+                {
+                    return BadRequest("The board is not balanced: The Team A and Team B ahave a different number of pieces.");
+
+                }
             }
             else
             {
