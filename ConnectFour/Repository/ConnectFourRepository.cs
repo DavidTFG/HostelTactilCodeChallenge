@@ -2,10 +2,12 @@ using System.Collections.Generic;
 
 namespace ConnectFour.Repository;
 
-public class ConnectFourRepository : IConnectFourRepository
+public class ConnectFourRepository
 {
     private const int ROWS = 6;
     private const int COLUMNS = 7;
+
+    //Checks if the given board has balanced pieces, meaning the difference in the counts of 'A' and 'B' pieces is not greather than 1.
     public bool CheckBalancedPieces(string board)
     {
         int countA = board.Count(piece => piece == 'A');
@@ -56,6 +58,15 @@ public class ConnectFourRepository : IConnectFourRepository
                 return false;
             }
             lastPiece = column[i];
+        }
+        return true;
+    }
+
+    public bool CheckSizeBoard(string board)
+    {
+        if (board.Length != COLUMNS * ROWS)
+        {
+            return false;
         }
         return true;
     }
