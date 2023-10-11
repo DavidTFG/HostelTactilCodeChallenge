@@ -8,7 +8,7 @@ public class ConnectFourRepository
     private const int ROWS = 6;
     private const int COLUMNS = 7;
 
-    //Launches the checks of all the preconditions, returning a message depending on the precondition that has failed
+    //Launches the checks of all preconditions, returning a message depending on the precondition that has failed
     public string CheckPreconditions(string board)
     {
         if (!CheckSizeBoard(board))
@@ -30,7 +30,86 @@ public class ConnectFourRepository
         return "";
     }
 
-    //Check if the provided board has the correct size, which should be equal to the product of COLUMNS and ROWS.
+    //Checks the board for a winning chain in horizontal, vertical, or diagonal directions. Returning the winning char.
+    public string CheckWinner(string board)
+    {
+        char piece1, piece2, piece3, piece4;
+        int position;
+
+
+        //Checks vertical chains
+        for (int columna = 0; columna < COLUMNS; columna++)
+        {
+            for (int fila = 0; fila < ROWS - 3; fila++)
+            {
+                position = columna * ROWS + fila;
+                piece1 = board[position];
+                piece2 = board[position + 1];
+                piece3 = board[position + 2];
+                piece4 = board[position + 3];
+                if (CheckChain(piece1, piece2, piece3, piece4))
+                {
+                    return piece1.ToString();
+                }
+            }
+        }
+
+        //Checks horizontal chains
+        for (int fila = 0; fila < ROWS; fila++)
+        {
+            for (int columna = 0; columna < COLUMNS - 3; columna++)
+            {
+                position = columna * ROWS + fila;
+                piece1 = board[position];
+                piece2 = board[position + ROWS];
+                piece3 = board[position + ROWS * 2];
+                piece4 = board[position + ROWS * 3];
+                if (CheckChain(piece1, piece2, piece3, piece4))
+                {
+                    return piece1.ToString();
+                }
+
+            }
+        }
+
+        //Checks ascending diagonal chains
+        for (int columna = 0; columna < COLUMNS - 3; columna++)
+        {
+            for (int fila = 0; fila < ROWS - 3; fila++)
+            {
+                position = columna * ROWS + fila;
+                piece1 = board[position];
+                piece2 = board[position + (ROWS + 1)];
+                piece3 = board[position + (ROWS + 1) * 2];
+                piece4 = board[position + (ROWS + 1) * 3];
+                if (CheckChain(piece1, piece2, piece3, piece4))
+                {
+                    return piece1.ToString();
+                }
+            }
+        }
+
+        //Checks descending diagonal chains
+        for (int columna = 0; columna < COLUMNS - 3; columna++)
+        {
+            for (int fila = 3; fila < ROWS; fila++)
+            {
+                position = columna * ROWS + fila;
+                piece1 = board[position];
+                piece2 = board[position + (ROWS - 1)];
+                piece3 = board[position + (ROWS - 1) * 2];
+                piece4 = board[position + (ROWS - 1) * 3];
+                if (CheckChain(piece1, piece2, piece3, piece4))
+                {
+                    return piece1.ToString();
+                }
+            }
+        }
+
+        return "X";
+    }
+
+    //Checks if the provided board has the correct size, which should be equal to the product of COLUMNS and ROWS.
     private bool CheckSizeBoard(string board)
     {
         if (board.Length != COLUMNS * ROWS)
@@ -53,7 +132,7 @@ public class ConnectFourRepository
         return false;
     }
 
-    //Check if in the provided board is there at least one 'A' piece in the bottom of a column
+    //Checks if in the provided board is there at least one 'A' piece in the bottom of a column
     private bool CheckAStarted(string board)
     {
         char[] bottomPieces = new char[COLUMNS];
@@ -72,7 +151,7 @@ public class ConnectFourRepository
             return false;
         }
     }
-    //Check if the pieces from the board are physically positioned correctly.
+    //Checks if the pieces from the board are physically positioned correctly.
     private bool CheckPhysicallyPositions(string board)
     {
         int totalLength = board.Length;
@@ -94,7 +173,7 @@ public class ConnectFourRepository
         return true;
     }
 
-    //Check if the pieces in a column are physically positioned correctly.
+    //Checks if the pieces in a column are physically positioned correctly.
     private bool CheckPhysicallyColumnPositions(string column)
     {
         char lastPiece = 'A';
@@ -109,12 +188,21 @@ public class ConnectFourRepository
         return true;
     }
 
-    public bool CheckWinner(string board)
+    //Checks if four pieces in a row have the same non-empty value.
+    private static bool CheckChain(char piece1, char piece2, char piece3, char piece4)
     {
-        return true;
+        if ((piece1 == piece2)
+            && (piece1 == piece3)
+            && (piece1 == piece4)
+            && piece1 != 'X')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
-
-
 
 
 

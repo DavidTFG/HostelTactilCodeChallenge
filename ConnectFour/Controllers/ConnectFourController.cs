@@ -17,13 +17,14 @@ public class ConnectFourController : ControllerBase
     [HttpGet]
     public IActionResult GetWinner()
     {
-        string board = "AXXXXXAXXXXXAXXXXXAXXXXXBBBXXXXXXXXXXXXXXX";
+        string board = "AXXXXXAXXXXXAXXXXXXXXXXXBBbBXXXXXXXXXXXXXX";
         try
         {
+            board = board.ToUpper();
             string preconditionFailed = _connectFourRepository.CheckPreconditions(board);
             if (preconditionFailed.Length == 0)
             {
-                return Ok("Calcular Ganador");
+                return Ok(_connectFourRepository.CheckWinner(board));
             }
             else
             {
