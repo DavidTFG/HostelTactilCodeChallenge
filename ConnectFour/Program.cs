@@ -1,5 +1,5 @@
 using ConnectFour.Repositories;
-
+using ConnectFour.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,6 +11,7 @@ builder.Services.AddSwaggerGen();
 
 //Add service
 builder.Services.AddScoped<IConnectFourRepository, ConnectFourRepository>();
+builder.Services.AddScoped<IConnectFourService, ConnectFourService>();
 
 var app = builder.Build();
 

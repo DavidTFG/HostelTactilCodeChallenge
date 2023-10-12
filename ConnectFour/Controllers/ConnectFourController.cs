@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ConnectFour.Repositories;
+using ConnectFour.Services;
 namespace ConnectFour.Controllers;
 
 //The Class ConnectFourController handle the HTTP POST request, validate the game board, and provide a reponse based on the game logic and conditions.
@@ -8,25 +8,25 @@ namespace ConnectFour.Controllers;
 public class ConnectFourController : ControllerBase
 {
 
-    private readonly IConnectFourRepository _connectFourRepository;
+    private readonly IConnectFourService _connectFourService;
 
-    public ConnectFourController(IConnectFourRepository connectFourRepository)
+    public ConnectFourController(IConnectFourService connectFourService)
     {
-        _connectFourRepository = connectFourRepository;
+        _connectFourService = connectFourService;
     }
 
 
-    //The method Post calls the repository which verifies the preconditions and determines the game winner from a board.
+    //The method Post calls the service that calls the repository to check de preconditions, if no preconditions then call the service to check the winner.
     [HttpPost]
     public IActionResult Post([FromBody] string board)
     {
         try
         {
             board = board.ToUpper();
-            string preconditionFailed = _connectFourRepository.CheckPreconditions(board);
+            string preconditionFailed = _connectFourService.CheckPreconditions(board);
             if (preconditionFailed.Length == 0)
             {
-                return Ok(_connectFourRepository.CheckWinner(board));
+                return Ok(_connectFourService.CheckWinner(board));
             }
             else
             {

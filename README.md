@@ -4,14 +4,18 @@ This web service is desigend to handle Connect Four game boards and determine th
 
 ### ConnectFourController
 
-That class handle HTTP POST request and interacts with the **ConnectFourRepository** to validate the game board and determine the winner.
+That class handle HTTP POST request and interacts with the **ConnectFourService** to validate the game board and determine the winner.
 
 In the **Post([FromBody] string board)** method:
 
 - Convert the string received to uppercase.
-- Check preconditions:
-  - If there are no preconditions failed, check for the winner.
+- Check preconditions calling service the service method:
+  - If there are no preconditions failed, check for the winner calling the service method.
   - If preconditions fail, return a 400 Bad Request with an error message depends on the precondition failed.
+
+### ConnectFourController
+
+That class makes the calls to the repository **ConnectFourRepository**.
 
 ### ConnectFourRepository
 

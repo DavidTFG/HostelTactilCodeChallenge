@@ -1,6 +1,6 @@
-namespace ConnectFour.Repositories;
+namespace ConnectFour.Services;
 
-public interface IConnectFourRepository
+public interface IConnectFourService
 {
     string CheckPreconditions(string board);
     string CheckWinner(string board);
