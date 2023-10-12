@@ -120,7 +120,7 @@ public class ConnectFourRepository : IConnectFourRepository
         int countA = board.Count(piece => piece == 'A');
         int countB = board.Count(piece => piece == 'B');
         int countX = board.Count(piece => piece == 'X');
-        if ((countA - countB) >= 0 && (countA - countB) <= 1 && ((countA + countB + countX) == (Board.ROWS * Board.COLUMNS)))
+        if ((countX == (Board.ROWS * Board.COLUMNS)) || ((countA - countB) >= 0 && (countA - countB) <= 1 && ((countA + countB + countX) == (Board.ROWS * Board.COLUMNS))))
         {
             return true;
         }
@@ -137,7 +137,7 @@ public class ConnectFourRepository : IConnectFourRepository
             bottomPieces[index] = board[position];
             index++;
         }
-        if (bottomPieces.Count(piece => piece == 'A') >= 1)
+        if ((bottomPieces.Count(piece => piece == 'X') == Board.COLUMNS) || (bottomPieces.Count(piece => piece == 'A') >= 1))
         {
             return true;
         }
