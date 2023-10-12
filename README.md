@@ -13,7 +13,7 @@ In the **Post([FromBody] string board)** method:
   - If there are no preconditions failed, check for the winner calling the service method.
   - If preconditions fail, return a 400 Bad Request with an error message depends on the precondition failed.
 
-### ConnectFourController
+### ConnectFourService
 
 That class makes the calls to the repository **ConnectFourRepository**.
 
@@ -35,10 +35,22 @@ The rest of private methods checks varios aspects of the game board.
 
 The Board model class defines **constants** for the number of rows and columns in a game board.
 
+### ConnectFourServiceTests
+
+This is a test class for the **ConnectFourService** from Connect Four project.
+The class test:
+
+- CheckWinner
+  - This method test **CheckWinner** method, which checks for a winner.
+    -The test cases include scenarios for vertical wins, horizontal wins, and diagonal wins, as well as a scenario where neither Player A nor player B wins.
+- CheckPreconditions
+  - This method test **CheckPreconditions** method, which checks various preconditions.
+    -The test cases include scenarios for different numbers of pieces on the board, unblaanced boards, boards that don't start with Player A, and boards with pieces not placed correctly.
+
 ## How to Start the Project
 
 - Open a terminal or command promt.
-- Navigate to the project folder "Connect Four"
+- Navigate to the project folder "ConnectFour"
 - Run the project using the following command:
   `dotnet run`
 - This will start the project, and you can access it in your web browser by navigating to the specified address.
@@ -46,3 +58,13 @@ The Board model class defines **constants** for the number of rows and columns i
   localhost:<PORT>/swagger
 
   Make sure you have the .NET SDK installed before running the project.
+
+## How to Test the Project
+
+- Open a terminal or command promt.
+- Navigate to the project folder "ConnectFourTests"
+- Run the tests using the following command:
+  `dotnet test`
+- This will run the tests.You can modify the tests from the **ConnectFourServiceTests.cs**.
+
+  Make sure you have the .NET SDK installed before testing the project.
