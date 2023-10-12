@@ -1,4 +1,4 @@
-
+using ConnectFour.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //Add service
-builder.Services.AddScoped<ConnectFour.Repository.ConnectFourRepository>();
+builder.Services.AddScoped<IConnectFourRepository, ConnectFourRepository>();
 
 var app = builder.Build();
 

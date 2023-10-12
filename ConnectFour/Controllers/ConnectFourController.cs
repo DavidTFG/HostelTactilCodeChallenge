@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ConnectFour.Repository;
+using ConnectFour.Repositories;
 namespace ConnectFour.Controllers;
 
 //The Class ConnectFourController handle the HTTP POST request, validate the game board, and provide a reponse based on the game logic and conditions.
@@ -8,9 +8,9 @@ namespace ConnectFour.Controllers;
 public class ConnectFourController : ControllerBase
 {
 
-    private readonly ConnectFourRepository _connectFourRepository;
+    private readonly IConnectFourRepository _connectFourRepository;
 
-    public ConnectFourController(ConnectFourRepository connectFourRepository)
+    public ConnectFourController(IConnectFourRepository connectFourRepository)
     {
         _connectFourRepository = connectFourRepository;
     }

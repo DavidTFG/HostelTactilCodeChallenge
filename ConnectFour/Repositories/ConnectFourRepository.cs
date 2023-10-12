@@ -1,7 +1,7 @@
 using ConnectFour.Models;
-namespace ConnectFour.Repository;
+namespace ConnectFour.Repositories;
 
-public class ConnectFourRepository
+public class ConnectFourRepository : IConnectFourRepository
 {
     //Launches the checks of all preconditions, returning a message depending on the precondition that has failed
     public string CheckPreconditions(string board)
