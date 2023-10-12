@@ -1,6 +1,6 @@
 # HostelTactilCodeChallenge Connect Four
 
-This web service is desigend to handle Connect Four game boards and determine the winner. It consists on the following key components:
+This web service is designed to handle Connect Four game boards and determine the winner. It consists of the following key components:
 
 ### ConnectFourController
 
@@ -29,7 +29,7 @@ In the **CheckWinner(string board)** method:
 
 - Checks the board for a winning chain in horizontal, vertical, or diagonal directions, returning the winning char.
 
-The rest of private methods checks varios aspects of the game board.
+The rest of private methods checks various aspects of the game board.
 
 ### Board Model
 
@@ -45,7 +45,7 @@ The class test:
     -The test cases include scenarios for vertical wins, horizontal wins, and diagonal wins, as well as a scenario where neither Player A nor player B wins.
 - CheckPreconditions
   - This method test **CheckPreconditions** method, which checks various preconditions.
-    -The test cases include scenarios for different numbers of pieces on the board, unblaanced boards, boards that don't start with Player A, and boards with pieces not placed correctly.
+    -The test cases include scenarios for different numbers of pieces on the board, unbalanced boards, boards that don't start with Player A, and boards with pieces not placed correctly.
 
 ## How to Start the Project
 
@@ -54,17 +54,17 @@ The class test:
 - Run the project using the following command:
   `dotnet run`
 - This will start the project, and you can access it in your web browser by navigating to the specified address.
-- Once the project is running, you can test the project using **Swagger**. Open your web browser and go to the following URL,also change to correct port:
+- Once the project is running, you can test the project using **Swagger**. Open your web browser and go to the following URL, also change to correct port:
   localhost:<PORT>/swagger
 
   Make sure you have the .NET SDK installed before running the project.
 
 ## How to Test the Project
 
-- Open a terminal or command promt.
+- Open a terminal or command prompt.
 - Navigate to the project folder "ConnectFourTests"
 - Run the tests using the following command:
   `dotnet test`
-- This will run the tests.You can modify the tests from the **ConnectFourServiceTests.cs**.
+- This will run the tests. You can modify the tests from the **ConnectFourServiceTests.cs**.
 
   Make sure you have the .NET SDK installed before testing the project.

@@ -18,7 +18,7 @@ public class ConnectFourServiceTests
 
     [Theory]
     //Test case for A vertical win
-    [InlineData("AAAAAAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", "A")]
+    [InlineData("AAAAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXBBBXXX", "A")]
     //Test case for A horizontal win
     [InlineData("AXXXXXAXXXXXAXXXXXAXXXXXBBBXXXXXXXXXXXXXXX", "A")]
     //Test case for B diagonal ascending win
@@ -26,7 +26,7 @@ public class ConnectFourServiceTests
     //Test case for B diagonal descending win
     [InlineData("AXXXXXXXXXXXXXXXXXBXXXXXABXXXXABBAXXABABXX", "B")]
     //Test case for X win, neither a nor b
-    [InlineData("AXXXXXAXXXXXBXXXXXAXXXXXABXXXXABBBXXABABXX", "X")]
+    [InlineData("AXXXXXAXXXXXXXXXXXXXXXXXABXXXXABBBXXABABXX", "X")]
     //Test case for X win, empty board
     [InlineData("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", "X")]
     public void CheckWinner_ShouldReturnWinner(string board, string expected)
@@ -47,7 +47,7 @@ public class ConnectFourServiceTests
     //Test case for unbalanced board
     [InlineData("ABAAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", "The board is not balanced: The Team A and Team B have different number of pieces.")]
     //Test case for board not starting A
-    [InlineData("BAXXXXBAXXXXBAXXXXBXXXXXBAXXXXBAXXXXBAXXXX", "Player A didn't started.")]
+    [InlineData("BAXXXXBAXXXXBAXXXXBAXXXXBAXXXXBAXXXXBAXXXX", "Player A didn't started.")]
     //Test case for pieces not physically placed correctly
     [InlineData("XXBXXXXXXXXXXXXXABXXXXXXXXXXXXXXXAXXXXXXXX", "There are pieces on the board that cannot be physically placed there.")]
     //Test case for board with all preconditions passed
